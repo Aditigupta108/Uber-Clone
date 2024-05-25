@@ -7,6 +7,10 @@
    -> Navigate on headerMenu using map 
    -> change font using Inter
 
-   
+5.  Designing of Search and google map sections
+    A. Search section
+       ----------------------------
+       ->  Add InputItems( Pickup and Drop location)
+       ->  Add Search Button 
 
 
