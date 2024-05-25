@@ -9,7 +9,7 @@ export default function Page() {
           src="/Uberbanner.jpg"
           width={900}
           height={1000}
-          className="object-contain h-full w-full"
+          className="h-full w-full object-contain"
         />
         <div className="absolute top-10 left-0 m-10">
           <SignIn />
