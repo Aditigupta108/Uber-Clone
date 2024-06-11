@@ -11,6 +11,6 @@
     A. Search section
        ----------------------------
        ->  Add InputItems( Pickup and Drop location)
-       ->  Add Search Button 
+       ->  Add Search Button
 
 
