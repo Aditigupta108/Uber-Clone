@@ -12,5 +12,12 @@
        ----------------------------
        ->  Add InputItems( Pickup and Drop location)
        ->  Add Search Button
+6. Generate api key within the credential option.
+7. import react-google-places-autocomplete in InputItem component.
 
 
+
+FEATURES->
+--------------------------
+1. GOOGLE_API_KEY is used when we use api in api.
+2. NEXT_API_KEY is used in public use.
