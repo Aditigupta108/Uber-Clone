@@ -14,10 +14,12 @@
        ->  Add Search Button
 6. Generate api key within the credential option.
 7. import react-google-places-autocomplete in InputItem component.
+8. We add latAndlong function to get access of it with the help of Google Map places api
+9. We use contextHook to store the information of source and destination address fetched with the help of api which can be accessible to whole application and get its information through useEffect hook; 
 
 
 
 FEATURES->
 --------------------------
 1. GOOGLE_API_KEY is used when we use api in api.
-2. NEXT_API_KEY is used in public use.
+2. NEXT_API_KEY is used in public use. 
