@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, OverlayView, OverlayViewF, useJsApiLoader } from "@react-google-maps/api";
 import { SourceContext } from "@/Context/SourceContext";
 import { DestinationContext } from "@/Context/DestinationContext";
 
@@ -88,7 +88,15 @@ function Googlemap() {
               height: 20,
             },
           }}
-        />
+        >
+          <OverlayViewF position={{lat:Source.lat,lng:Source.lng}}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          >
+            <div className="font-bold p-2 bg-white inline-block">
+              <p className="text-black text-[18px]">{Source.label}</p>
+            </div>
+          </OverlayViewF>
+          </MarkerF>
       ) : null}
 
       {Destination?.length != [] ? (
@@ -101,7 +109,16 @@ function Googlemap() {
               height: 20,
             },
           }}
-        />
+        >
+          <OverlayViewF position={{lat:Destination.lat,lng:Destination.lng}}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          >
+            <div className="font-bold p-2 bg-white inline-block">
+              <p className="text-black text-[18px]">{Destination.label}</p>
+            </div>
+          </OverlayViewF>
+
+        </MarkerF>
       ) : null}
     </GoogleMap>
   );

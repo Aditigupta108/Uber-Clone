@@ -23,6 +23,7 @@
 
 13. We use context hook to change the hardcoded lat nad lng of places using <useEffect> hook.
 14. Use inbuilt <MarkerF> component to mark the source nad destination on map.
+15. Use <OverlayviewF> component to lable the mark on the map.
 
 ## FEATURES->
 
