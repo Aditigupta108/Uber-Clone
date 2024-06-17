@@ -1,5 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { GoogleMap, MarkerF, OverlayView, OverlayViewF, useJsApiLoader } from "@react-google-maps/api";
+import {
+  DirectionsRenderer,
+  GoogleMap,
+  MarkerF,
+  OverlayView,
+  OverlayViewF,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 import { SourceContext } from "@/Context/SourceContext";
 import { DestinationContext } from "@/Context/DestinationContext";
 
@@ -16,7 +23,7 @@ function Googlemap() {
 
   const { Source, setSource } = useContext(SourceContext);
   const { Destination, setDestination } = useContext(DestinationContext);
-
+  const [directionRoutePoints, setdirectionRoutePoints] = useState([]);
   //hardcoded form.......
   const [center, setCenter] = useState({
     lat: -3.745,
@@ -39,6 +46,9 @@ function Googlemap() {
         lng: Source.lng,
       });
     }
+    if (Source?.length != [] && Destination?.length != []) {
+      directionRoute();
+    }
   }, [Source]);
 
   useEffect(() => {
@@ -52,7 +62,29 @@ function Googlemap() {
         lng: Destination.lng,
       });
     }
+
+    if (Source?.length != [] && Destination?.length != []) {
+      directionRoute();
+    }
   }, [Destination]);
+
+  const directionRoute = () => {
+    const DirectionService = new google.maps.DirectionService();
+    DirectionService.route(
+      {
+        origin: { lat: Source.lat, lng: Source.lng },
+        destination: { lat: Destination.lat, lng: Destination.lng },
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === google.maps.DirectionsService.OK) {
+          setdirectionRoutePoints(result);
+        } else {
+          console.error("Error");
+        }
+      }
+    );
+  };
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -89,14 +121,15 @@ function Googlemap() {
             },
           }}
         >
-          <OverlayViewF position={{lat:Source.lat,lng:Source.lng}}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          <OverlayViewF
+            position={{ lat: Source.lat, lng: Source.lng }}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           >
             <div className="font-bold p-2 bg-white inline-block">
               <p className="text-black text-[18px]">{Source.label}</p>
             </div>
           </OverlayViewF>
-          </MarkerF>
+        </MarkerF>
       ) : null}
 
       {Destination?.length != [] ? (
@@ -110,16 +143,24 @@ function Googlemap() {
             },
           }}
         >
-          <OverlayViewF position={{lat:Destination.lat,lng:Destination.lng}}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          <OverlayViewF
+            position={{ lat: Destination.lat, lng: Destination.lng }}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           >
             <div className="font-bold p-2 bg-white inline-block">
               <p className="text-black text-[18px]">{Destination.label}</p>
             </div>
           </OverlayViewF>
-
         </MarkerF>
       ) : null}
+
+      <DirectionsRenderer directions={directionRoutePoints} options={{
+        suppressMarkers:true,
+        polylineOptions:{
+          strokeColor:'#000',
+          strokeWeight:5
+        }
+      }} />
     </GoogleMap>
   );
 }
