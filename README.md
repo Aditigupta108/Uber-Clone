@@ -25,6 +25,13 @@
 14. Use inbuilt <MarkerF> component to mark the source nad destination on map.
 15. Use <OverlayviewF> component to lable the mark on the map.
 
+16. Add <CartListData> of recommendations.
+17. Calculate the distance between source and destination.
+18. Add <CarlistOptions> component.
+19. Then add <CartlistItems> component to separetly design each car options.
+20. Add distance prop to make update each and every recommendations price updated according to calculated distance.
+
+
 ## FEATURES->
 
 1. GOOGLE_API_KEY is used when we use api in api.
